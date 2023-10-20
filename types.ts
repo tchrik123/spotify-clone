@@ -36,11 +36,11 @@ export interface Price {
 
 export interface Subscription {
   id: string;
-  user_id: StringConstructor;
+  user_id: String;
   status?: Stripe.Subscription.Status;
   metadata?: Stripe.Metadata;
-  price_id?: StringConstructor;
-  quantity?: string;
+  price_id?: String;
+  quantity?: number;
   cancel_at_period_end?: boolean;
   created: string;
   current_period_start: string;
@@ -50,5 +50,5 @@ export interface Subscription {
   canceled_at?: string;
   trial_start?: string;
   trial_end?: string;
-  prices?: PromiseConstructor;
+  prices?: Price;
 }
