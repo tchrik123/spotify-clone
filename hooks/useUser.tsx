@@ -1,6 +1,12 @@
 import { Subscription, UserDetails } from "../types";
 import { createContext } from "react";
 import { User } from "@supabase/auth-helpers-nextjs";
+import {
+  useSessionContext,
+  useUser as useSupaUser,
+} from "@supabase/auth-helpers-react";
+import { useState } from "react";
+import { SupabaseAuthClient } from "@supabase/supabase-js/dist/module/lib/SupabaseAuthClient";
 
 type UserContextType = {
   accessToken: string | null;
@@ -17,3 +23,24 @@ export const UserContext = createContext<UserContextType | undefined>(
 export interface Props {
   [propName: string]: any;
 }
+
+export const MyUserContextProvider = (props: Props) => {
+  const {
+    session,
+    isLoading: isLoadingUser,
+    supabaseClient: supabase,
+  } = useSessionContext();
+  const user = useSupaUser();
+  const accessToken = session?.access_token ?? null;
+  const [isLoadingData, setIsLoadingData] = useState(false);
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
+
+  const getUserDetails = () => supabase.from(`users`).select(`*`).single();
+  const getSubscription = () =>
+  supabase
+  .from (`subscriptions`)
+  .select(`*, prices(*, products(*))`)
+  .in(`status`, [`trialing`, `acive`])
+  .single()
+};

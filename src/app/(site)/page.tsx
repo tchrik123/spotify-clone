@@ -1,7 +1,12 @@
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 
+
 export default function Home() {
+  const getUserDetails = () => {
+    const asd = supabase.from(`users`);
+    console.log(asd);
+  };
   return (
     <div
       className="
@@ -24,6 +29,7 @@ export default function Home() {
           >
             Welcome Back
           </h1>
+
           <div
             className="
           grid
@@ -36,17 +42,19 @@ export default function Home() {
           "
           >
             <ListItem
-              image="/iamges/liked.png"
+              image="/images/liked.png"
               name="Liked songs"
               href="liked"
             />
           </div>
         </div>
       </Header>
+
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
           <h1 className="text-white text-2xl font-semibold">Newest songs</h1>
         </div>
+
         <div>List of Songs!</div>
       </div>
     </div>
