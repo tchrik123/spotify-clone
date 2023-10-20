@@ -32,6 +32,7 @@ export interface Price {
   trial_period_days?: number | null;
   metadata?: Stripe.Metadata;
   products?: Product;
+  
 }
 
 export interface Subscription {
