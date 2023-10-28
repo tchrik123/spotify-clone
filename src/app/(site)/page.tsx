@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
-
+import { supabase } from "@supabase/auth-ui-shared";
 
 export default function Home() {
   const getUserDetails = () => {

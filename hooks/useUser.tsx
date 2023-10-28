@@ -36,7 +36,9 @@ export const MyUserContextProvider = (props: Props) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getUserDetails = () => supabase.from(`users`).select(`*`).single();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getSubscription = () =>
     supabase
       .from(`subscriptions`)
@@ -68,7 +70,15 @@ export const MyUserContextProvider = (props: Props) => {
       setUserDetails(null);
       setSubscription(null);
     }
-  }, [user, isLoadingUser]);
+  }, [
+    user,
+    isLoadingUser,
+    isLoadingData,
+    userDetails,
+    subscription,
+    getUserDetails,
+    getSubscription,
+  ]);
 
   const value = {
     accessToken,
